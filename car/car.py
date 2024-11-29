@@ -2,7 +2,6 @@
 
 import math
 
-#from track.track import Track
 
 class Car:
     def __init__(self, driver_name: str, car_number: int) -> None:
@@ -16,7 +15,15 @@ class Car:
             driver_name (str): The name of the driver
             car_number (int): The number of the car
         """
-        pass
+        self.driver_name = driver_name
+        self.car_number = car_number
+        self.speed = 0
+        self.max_speed = 0.5
+        self.acceleration = 0.0025
+        self.reducir_velocidad = 0.001
+        self.direction = 0
+        self.angular_speed = 0.5
+        self.x, self.y = (0, 0)
 
     def get_speed(self) -> float:
         """
@@ -25,7 +32,7 @@ class Car:
         Returns:
             float: The speed of the car
         """
-        pass
+        return self.speed
 
     def get_position(self) -> list[float]:
         """
@@ -34,7 +41,7 @@ class Car:
         Returns:
             list[float]: The position [x, y] of the car
         """
-        pass
+        return [self.x, self.y]
 
     def get_direction(self) -> float:
         """
@@ -43,7 +50,7 @@ class Car:
         Returns:
             float: The direction of the car in radians
         """
-        pass
+        return self.directaion
 
     def set_position(self, position: list[float]):
         """
@@ -52,7 +59,8 @@ class Car:
         Args:
             position (list[float]): The position [x, y] of the car
         """
-        pass
+        self.last_position = self.x, self.y
+        self.x, self.y
 
     def set_speed(self, speed: float):
         """
@@ -61,7 +69,7 @@ class Car:
         Args:
             speed (float): The speed of the car
         """
-        pass
+        self.speed
 
     def set_direction(self, direction: float):
         """
@@ -70,7 +78,7 @@ class Car:
         Args:
             direction (float): The direction of the car in radians
         """
-        pass
+        self.direction
 
     def set_distances(self, distances: list[float]):
         """
@@ -92,7 +100,7 @@ class Car:
         Returns:
             tuple[float, float]: The acceleration and steer of the car
         """
-        pass
+        return [self.acceleration, self.steer]
 
     def send_command(self, acceleration: float, steer: float):
         """
@@ -102,5 +110,5 @@ class Car:
             acceleration (float): The acceleration of the car (how much to speed up, or slow down in this time step)
             steer (float): The steer of the car (how much to turn in this time step)
         """
-        pass
+        self.steer = self.direction
 
