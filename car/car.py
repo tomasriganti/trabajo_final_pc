@@ -22,8 +22,8 @@ class Car:
         self.acceleration = 0.0025
         self.reducir_velocidad = 0.001
         self.direction = 0
-        self.angular_speed = 0.5
-        self.x, self.y = (0, 0)
+        self.steer = 0.5
+        self.x, self.y = (10, 10)
 
     def get_speed(self) -> float:
         """
@@ -50,7 +50,7 @@ class Car:
         Returns:
             float: The direction of the car in radians
         """
-        return self.directaion
+        return self.direction
 
     def set_position(self, position: list[float]):
         """
@@ -59,8 +59,8 @@ class Car:
         Args:
             position (list[float]): The position [x, y] of the car
         """
-        self.last_position = self.x, self.y
-        self.x, self.y
+        self.last_position = (self.x, self.y)
+        self.x, self.y = position
 
     def set_speed(self, speed: float):
         """
@@ -69,7 +69,7 @@ class Car:
         Args:
             speed (float): The speed of the car
         """
-        self.speed
+        self.speed = speed
 
     def set_direction(self, direction: float):
         """
@@ -78,7 +78,7 @@ class Car:
         Args:
             direction (float): The direction of the car in radians
         """
-        self.direction
+        self.direction = direction
 
     def set_distances(self, distances: list[float]):
         """
@@ -100,7 +100,8 @@ class Car:
         Returns:
             tuple[float, float]: The acceleration and steer of the car
         """
-        return [self.acceleration, self.steer]
+        return (self.acceleration, self.steer)
+
 
     def send_command(self, acceleration: float, steer: float):
         """
@@ -110,5 +111,16 @@ class Car:
             acceleration (float): The acceleration of the car (how much to speed up, or slow down in this time step)
             steer (float): The steer of the car (how much to turn in this time step)
         """
-        self.steer = self.direction
+        self.acceleration = acceleration
+        self.steer = steer
+
+    def reduce_speed_by_factor(self, factor: float):
+        """
+        Reduces the speed of the car by a given factor.
+
+        Args:
+        factor (float): The factor by which to reduce the speed
+        """
+        self.speed /= factor
+
 
