@@ -15,4 +15,5 @@ class AutoCar(Car):
         Returns:
             list[float]: The command [acceleration, steering]
         """
-        pass
+        self.pygame_keys = pygame_keys
+        self.is_inside_track = is_inside_track
