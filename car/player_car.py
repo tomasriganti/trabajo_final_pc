@@ -27,17 +27,14 @@ class PlayerCar(Car):
         Returns:
             list[float]: The command [acceleration, steering]
         """
-
-
-    def move_car(self, claves):
-        if claves[self.movement_keys[0]]:  # Acelerar
+        if pygame_keys[self.movement_keys[0]]:  # Acelerar
             self.speed += self.acceleration
-            self.speed = min(self.speed, self.max_speed)  # Límite velocidad máx
-        elif claves[self.movement_keys[1]]:  # Acelerar marcha atrás
+            self.speed = min(self.speed, self.max_speed)  # velocidad máx
+        elif pygame_keys[self.movement_keys[1]]:  # marcha atrás
             self.speed -= self.acceleration
             self.speed = max(self.speed, -self.max_speed / 2)  # Límite marcha atrás
         else:
-        # Reducir velocidad
+            # Reducir velocidad
             if self.speed > 0:
                 self.speed -= self.reducir_velocidad
                 self.speed = max(self.speed, 0)
@@ -45,15 +42,10 @@ class PlayerCar(Car):
                 self.speed += self.reducir_velocidad
                 self.speed = min(self.speed, 0)
 
-        if claves[self.movement_keys[2]]:  # Girar izquierda
-            self.direction += self.steer
+        if pygame_keys[self.movement_keys[2]]:  # Girar izquierda
+            self.direction -= math.radians(self.steer)
 
-        if claves[self.movement_keys[3]]:  # Girar derecha
-            self.direction -= self.steer
+        if pygame_keys[self.movement_keys[3]]:  # Girar derecha
+            self.direction += math.radians(self.steer)
 
-        # Convertir dirección a radianes
-        radianes = math.radians(self.direction)
-
-        # Actualizar posición
-        self.x += self.speed * math.cos(radianes)
-        self.y -= self.speed * math.sin(radianes)
+        return [self.acceleration, self.steer]
