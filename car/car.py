@@ -2,7 +2,6 @@
 
 import math
 
-
 class Car:
     def __init__(self, driver_name: str, car_number: int) -> None:
         raise NotImplementedError("Car class must be inherited by a child class")
@@ -23,7 +22,7 @@ class Car:
         self.reducir_velocidad = 0.001
         self.direction = 0
         self.steer = 0.5
-        self.x, self.y = (10, 10)
+        self.position = (0,0)
 
     def get_speed(self) -> float:
         """
@@ -41,7 +40,7 @@ class Car:
         Returns:
             list[float]: The position [x, y] of the car
         """
-        return [self.x, self.y]
+        return self.position
 
     def get_direction(self) -> float:
         """
@@ -59,8 +58,7 @@ class Car:
         Args:
             position (list[float]): The position [x, y] of the car
         """
-        self.last_position = (self.x, self.y)
-        self.x, self.y = position
+        self.position = position
 
     def set_speed(self, speed: float):
         """
@@ -102,7 +100,6 @@ class Car:
         """
         return (self.acceleration, self.steer)
 
-
     def send_command(self, acceleration: float, steer: float):
         """
         Sends the command to the car
@@ -113,14 +110,3 @@ class Car:
         """
         self.acceleration = acceleration
         self.steer = steer
-
-    def reduce_speed_by_factor(self, factor: float):
-        """
-        Reduces the speed of the car by a given factor.
-
-        Args:
-        factor (float): The factor by which to reduce the speed
-        """
-        self.speed /= factor
-
-
